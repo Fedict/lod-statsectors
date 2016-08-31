@@ -8,6 +8,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>statsectors</artifactId>
+  <name>statsectors</name>
   <build>
     <plugins>
       <plugin>
@@ -20,7 +21,13 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <minimizeJar>true</minimizeJar>
               <transformers>
+                <transformer>
+                  <manifestEntries>
+                    <Main-Class>be.fedict.lodtools.statsectos.Main</Main-Class>
+                  </manifestEntries>
+                </transformer>
                 <transformer />
               </transformers>
             </configuration>
@@ -37,6 +44,7 @@
     </repository>
   </repositories>
   <properties>
+    <rdf4j.version>2.0</rdf4j.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <geotools.version>15.0</geotools.version>

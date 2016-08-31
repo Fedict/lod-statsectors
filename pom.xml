@@ -12,6 +12,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <geotools.version>15.0</geotools.version>
+	<rdf4j.version>2.0</rdf4j.version>
     </properties>
      <repositories>
         <repository>
@@ -24,7 +25,7 @@
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-model</artifactId>
-            <version>2.0M2</version>
+            <version>${rdf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
@@ -41,8 +42,7 @@
             <artifactId>gt-swing</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-        
-                       <dependency>
+         <dependency>
             <groupId>org.geotools.xsd</groupId>
             <artifactId>gt-xsd-kml</artifactId>
             <version>${geotools.version}</version>
@@ -50,22 +50,22 @@
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-rio-datatypes</artifactId>
-            <version>2.0M2</version>
+            <version>${rdf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-repository-sail</artifactId>
-            <version>2.0M2</version>
+            <version>${rdf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.rdf4j</groupId>
             <artifactId>rdf4j-sail-memory</artifactId>
-            <version>2.0M2</version>
+            <version>${rdf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-epsg-wkt</artifactId>
-            <version>15.0</version>
+            <version>${geotools.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -81,7 +81,13 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+	    <minimizeJar>true</minimizeJar>
               <transformers>
+		<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>be.fedict.lodtools.statsectos.Main</Main-Class>
+                  </manifestEntries>
+                </transformer>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
               </transformers>
             </configuration>
